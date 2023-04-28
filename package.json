@@ -1,5 +1,5 @@
 {
-  "name": "Text-Classifier",
+  "name": "text-selector",
   "version": "1.0.0",
   "description": "Your Figma Plugin",
   "main": "code.js",
