@@ -1,9 +1,10 @@
-figma.showUI(__html__, { width: 282, height: 250 });
+figma.showUI(__html__, { width: 282, height: 275 });
 
 figma.ui.onmessage = async (msg) => {
   if (msg.type === 'select-layers') {
     const selectionCriteria = msg.selectionCriteria;
     const includePunctuation = msg.includePunctuation;
+    const excludeHiddenLayers = msg.excludeHiddenLayers;
 
     let nodesToProcess = figma.currentPage.selection;
 
@@ -14,7 +15,7 @@ figma.ui.onmessage = async (msg) => {
     const textNodes = await findTextNodes(nodesToProcess);
 
     const filteredTextNodes = textNodes.filter((node) =>
-      shouldSelectNode(node, selectionCriteria, includePunctuation),
+      shouldSelectNode(node, selectionCriteria, includePunctuation, excludeHiddenLayers),
     );
 
     if (filteredTextNodes.length === 0) {
@@ -42,7 +43,11 @@ async function findTextNodes(nodes: ReadonlyArray<BaseNode>): Promise<TextNode[]
   return textNodes;
 }
 
-function shouldSelectNode(node: TextNode, selectionCriteria: string, includePunctuation: boolean): boolean {
+function shouldSelectNode(node: TextNode, selectionCriteria: string, includePunctuation: boolean, excludeHiddenLayers: boolean): boolean {
+  if (excludeHiddenLayers && node.visible === false) {
+    return false;
+  }
+
   const regexes: { [key: string]: RegExp } = {
     text: /[a-zA-Z]+/,
     numbers: /\d+/,

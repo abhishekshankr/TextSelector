@@ -78,7 +78,7 @@
     .option-row {
       display: flex;
       align-items: center;
-      margin-top: 8px;
+      /*margin-top: 4px;*/
     }
 
     label {
@@ -170,22 +170,30 @@
       </button>
     </div>
     <div class="option-row">
+      <input type="checkbox" id="excludeHiddenLayers" />
+      <label for="excludeHiddenLayers">Include hidden layers in selection</label>
+    </div>
+    <div class="option-row">
       <input type="checkbox" id="includePunctuation" />
       <label for="includePunctuation">Include punctuations as special characters .,?!</label>
     </div>
   </div>
+  </div>
   <script>
     document.getElementById('selectText').onclick = () => {
       const includePunctuation = document.getElementById('includePunctuation').checked;
-      parent.postMessage({ pluginMessage: { type: 'select-layers', selectionCriteria: 'text', includePunctuation } }, '*');
+      const excludeHiddenLayers = !document.getElementById('excludeHiddenLayers').checked;
+      parent.postMessage({ pluginMessage: { type: 'select-layers', selectionCriteria: 'text', includePunctuation, excludeHiddenLayers } }, '*');
     };
     document.getElementById('selectNumbers').onclick = () => {
       const includePunctuation = document.getElementById('includePunctuation').checked;
-      parent.postMessage({ pluginMessage: { type: 'select-layers', selectionCriteria: 'numbers', includePunctuation } }, '*');
+      const excludeHiddenLayers = !document.getElementById('excludeHiddenLayers').checked;
+      parent.postMessage({ pluginMessage: { type: 'select-layers', selectionCriteria: 'numbers', includePunctuation, excludeHiddenLayers } }, '*');
     };
     document.getElementById('selectSpecialCharacters').onclick = () => {
       const includePunctuation = document.getElementById('includePunctuation').checked;
-      parent.postMessage({ pluginMessage: { type: 'select-layers', selectionCriteria: 'specialCharacters', includePunctuation } }, '*');
+      const excludeHiddenLayers = !document.getElementById('excludeHiddenLayers').checked;
+      parent.postMessage({ pluginMessage: { type: 'select-layers', selectionCriteria: 'specialCharacters', includePunctuation, excludeHiddenLayers } }, '*');
     };
   </script>
 
