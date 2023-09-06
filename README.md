@@ -2,6 +2,8 @@
   Text Classifier Figma Plugin
 </h1>
 
+![Cover image showcasing the text selector plugin with its features](Cover.png)
+
 Text Classifier is a convenient tool designed for selecting text layers in a design project based on specific criteria. It offers users the ability to choose between text, numbers, and special characters, with an additional option to include punctuations as special characters.
 
 <b>How it works</b>
