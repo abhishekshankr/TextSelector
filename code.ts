@@ -24,7 +24,7 @@ figma.ui.onmessage = async (msg) => {
     }
 
     figma.currentPage.selection = filteredTextNodes;
-    figma.closePlugin();
+    //figma.closePlugin();
     figma.notify('Selected layers based on criteria');
   }
 };
